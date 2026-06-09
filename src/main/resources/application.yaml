@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/board_game_cafe
+    username: postgres
+    password: your_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL17Dialect
+
+  sql:
+    init:
+      mode: always
+      platform: postgresql
+      data-locations: classpath:db/scripts/*.sql
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
