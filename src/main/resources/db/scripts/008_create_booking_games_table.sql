@@ -1,29 +1,10 @@
 CREATE TABLE booking_games (
     id BIGSERIAL PRIMARY KEY,
     booking_id BIGINT NOT NULL,
-    game_id BIGINT NOT NULL,
-    game_instance_id BIGINT,
-    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT fk_booking_games_booking
-        FOREIGN KEY (booking_id)
-        REFERENCES bookings(id)
-        ON DELETE CASCADE,
-    
-    CONSTRAINT fk_booking_games_game
-        FOREIGN KEY (game_id)
-        REFERENCES games(id)
-        ON DELETE RESTRICT,
-    
-    CONSTRAINT fk_booking_games_instance
-        FOREIGN KEY (game_instance_id)
-        REFERENCES game_instances(id)
-        ON DELETE SET NULL,
-    
-    CONSTRAINT uq_booking_games_booking_game
-        UNIQUE (booking_id, game_id)
+    game_instance_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_booking_games_booking_id ON booking_games(booking_id);
-CREATE INDEX idx_booking_games_game_id ON booking_games(game_id);
 CREATE INDEX idx_booking_games_instance_id ON booking_games(game_instance_id);
+CREATE UNIQUE INDEX idx_booking_games_unique ON booking_games(booking_id, game_instance_id);

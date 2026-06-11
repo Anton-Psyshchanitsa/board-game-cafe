@@ -2,34 +2,14 @@ CREATE TABLE game_sessions (
     id BIGSERIAL PRIMARY KEY,
     booking_id BIGINT,
     game_id BIGINT NOT NULL,
-    game_name VARCHAR(200),
     user_id BIGINT NOT NULL,
     session_date DATE NOT NULL,
     duration_minutes INT,
     rating INT,
     review TEXT,
+    is_edited BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT fk_game_sessions_booking
-        FOREIGN KEY (booking_id)
-        REFERENCES bookings(id)
-        ON DELETE SET NULL,
-    
-    CONSTRAINT fk_game_sessions_game
-        FOREIGN KEY (game_id)
-        REFERENCES games(id)
-        ON DELETE RESTRICT,
-    
-    CONSTRAINT fk_game_sessions_user
-        FOREIGN KEY (user_id)
-        REFERENCES users(id)
-        ON DELETE RESTRICT,
-    
-    CONSTRAINT chk_game_sessions_duration
-        CHECK (duration_minutes IS NULL OR duration_minutes > 0),
-    
-    CONSTRAINT chk_game_sessions_rating
-        CHECK (rating IS NULL OR (rating >= 1 AND rating <= 5))
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_game_sessions_game_id ON game_sessions(game_id);

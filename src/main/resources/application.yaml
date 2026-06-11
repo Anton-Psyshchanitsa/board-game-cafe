@@ -1,23 +1,23 @@
 spring:
+  application:
+    name: board-game-cafe
+
   datasource:
     url: jdbc:postgresql://localhost:5432/board_game_cafe
     username: postgres
-    password: your_password
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL17Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
-  sql:
-    init:
-      mode: always
-      platform: postgresql
-      data-locations: classpath:db/scripts/*.sql
+  liquibase:
+    enabled: false
 
 server:
   port: 8080

@@ -1,24 +1,22 @@
-CREATE TABLE game_instances (
+CREATE TABLE games (
     id BIGSERIAL PRIMARY KEY,
-    game_id BIGINT NOT NULL,
-    inventory_number VARCHAR(50) NOT NULL UNIQUE,
-    condition VARCHAR(20) NOT NULL DEFAULT 'good',
-    purchase_date DATE,
-    is_available BOOLEAN NOT NULL DEFAULT TRUE,
-    notes TEXT,
+    name VARCHAR(200) NOT NULL,
+    description TEXT,
+    category_id BIGINT NOT NULL,
+    min_players INT NOT NULL,
+    max_players INT NOT NULL,
+    avg_duration_minutes INT NOT NULL,
+    difficulty_level VARCHAR(20) NOT NULL,
+    year_published INT,
+    publisher VARCHAR(100),
+    image_url VARCHAR(500),
+    creator_id BIGINT,
+    updater_id BIGINT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT fk_game_instances_game
-        FOREIGN KEY (game_id)
-        REFERENCES games(id)
-        ON DELETE RESTRICT,
-    
-    CONSTRAINT chk_game_instances_condition
-        CHECK (condition IN ('excellent', 'good', 'fair', 'poor', 'damaged'))
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_game_instances_game_id ON game_instances(game_id);
-CREATE INDEX idx_game_instances_inventory_number ON game_instances(inventory_number);
-CREATE INDEX idx_game_instances_is_available ON game_instances(is_available);
-CREATE INDEX idx_game_instances_condition ON game_instances(condition);
+CREATE INDEX idx_games_name ON games(name);
+CREATE INDEX idx_games_category_id ON games(category_id);
+CREATE INDEX idx_games_players ON games(min_players, max_players);
+CREATE INDEX idx_games_difficulty ON games(difficulty_level);
