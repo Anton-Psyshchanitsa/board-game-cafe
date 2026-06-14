@@ -1,10 +1,7 @@
 CREATE TABLE bookings (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
-    user_name VARCHAR(100),
-    user_phone VARCHAR(20),
     table_id BIGINT,
-    table_number VARCHAR(10),
     booking_date DATE NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,

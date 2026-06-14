@@ -5,13 +5,11 @@ CREATE TABLE game_sessions (
     user_id BIGINT NOT NULL,
     session_date DATE NOT NULL,
     duration_minutes INT,
-    rating INT,
+    rating INT CHECK (rating IS NULL OR (rating >= 1 AND rating <= 5)),
     review TEXT,
+    is_edited BOOLEAN NOT NULL DEFAULT false,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT chk_game_sessions_duration CHECK (duration_minutes IS NULL OR duration_minutes > 0),
-    CONSTRAINT chk_game_sessions_rating CHECK (rating IS NULL OR (rating >= 1 AND rating <= 5))
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE game_sessions ADD CONSTRAINT fk_game_sessions_booking FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE SET NULL;
