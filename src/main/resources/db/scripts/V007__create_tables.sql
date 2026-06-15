@@ -7,9 +7,5 @@ CREATE TABLE tables (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    CONSTRAINT chk_tables_capacity
-        CHECK (capacity > 0)
+    CONSTRAINT chk_tables_capacity CHECK (capacity > 0)
 );
-
-CREATE INDEX idx_tables_table_number ON tables(table_number);
-CREATE INDEX idx_tables_is_active ON tables(is_active);
