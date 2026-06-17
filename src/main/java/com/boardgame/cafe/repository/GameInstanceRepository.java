@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface GameInstanceRepository extends JpaRepository<GameInstance, Long> {
 
-    Page<Game> findByGameId(Long gameId, Pageable pageable);
+    Page<GameInstance> findByGameId(Long gameId, Pageable pageable);
 
     Page<GameInstance> findByIsAvailableTrue(Pageable pageable);
 
