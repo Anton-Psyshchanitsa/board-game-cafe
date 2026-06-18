@@ -26,4 +26,8 @@ public class RoleResponseDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty("updated_at")
+    private LocalDateTime updatedAt;
 }

@@ -1,12 +1,10 @@
 package com.boardgame.cafe.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +13,7 @@ import java.util.Objects;
 @ToString(exclude = "games")
 @Entity
 @Table(name = "game_categories")
-public class GameCategory {
+public class GameCategory extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +24,6 @@ public class GameCategory {
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Game> games;

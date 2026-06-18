@@ -2,12 +2,10 @@ package com.boardgame.cafe.entity;
 
 import com.boardgame.cafe.enums.DifficultyLevel;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +14,7 @@ import java.util.Objects;
 @ToString(exclude = {"category", "creator", "updater", "gameInstances", "gameSessions"})
 @Entity
 @Table(name = "games")
-public class Game {
+public class Game extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,12 +47,6 @@ public class Game {
 
     @Column(name = "image_url", length = 500)
     private String imageUrl;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)

@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -14,7 +13,7 @@ import java.util.Objects;
 @ToString(exclude = {"booking", "game", "user"})
 @Entity
 @Table(name = "game_sessions")
-public class GameSession {
+public class GameSession extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +33,6 @@ public class GameSession {
 
     @Column(name = "is_edited")
     private Boolean isEdited;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")

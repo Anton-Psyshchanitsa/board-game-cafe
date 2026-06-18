@@ -20,6 +20,10 @@ spring:
   liquibase:
     enabled: true
 
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true
+
 server:
   port: 8080
   servlet:

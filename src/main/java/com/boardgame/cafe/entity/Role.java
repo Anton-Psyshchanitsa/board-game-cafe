@@ -1,12 +1,10 @@
 package com.boardgame.cafe.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -14,8 +12,7 @@ import java.util.Objects;
 @ToString(exclude = "users")
 @Entity
 @Table(name = "roles")
-
-public class Role {
+public class Role extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +23,6 @@ public class Role {
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private java.util.List<User> users;

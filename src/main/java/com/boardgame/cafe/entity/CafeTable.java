@@ -1,11 +1,10 @@
 package com.boardgame.cafe.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+        import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +14,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "tables")
 //переименован класс из Table в CafeTable из-за конфликта с @Table
-public class CafeTable {
+public class CafeTable extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,12 +31,6 @@ public class CafeTable {
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "table", fetch = FetchType.LAZY)
     private List<Booking> bookings;

@@ -7,8 +7,8 @@ import com.boardgame.cafe.enums.BookingStatus;
 import com.boardgame.cafe.mapper.BookingMapper;
 import com.boardgame.cafe.repository.*;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.Table;
 import lombok.RequiredArgsConstructor;
+import com.boardgame.cafe.entity.CafeTable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class BookingService {
 
         Booking booking = bookingMapper.toEntity(dto);
         booking.setUser(user);
-        booking.setTable((Table) table);
+        booking.setTable(table);
         booking.setStatus(BookingStatus.PENDING);
         Booking savedBooking = bookingRepository.save(booking);
 
@@ -92,7 +92,7 @@ public class BookingService {
         if (dto.getTableId() != null) {
             CafeTable table = cafeTableRepository.findById(dto.getTableId())
                     .orElseThrow(() -> new EntityNotFoundException("Table not found with id: " + dto.getTableId()));
-            booking.setTable((Table) table);
+            booking.setTable(table);
         }
         bookingMapper.updateEntityFromDto(dto, booking);
         return bookingMapper.toResponseDto(bookingRepository.save(booking));
